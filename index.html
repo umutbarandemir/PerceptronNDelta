@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perceptron / Delta (Adaline) Simülatörü</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header>
+      <h1>🧠 Perceptron / Delta (Adaline) Simülatörü</h1>
+    </header>
+
+    <main class="main-grid">
+
+      <section class="panel input-panel">
+        <h2>⚙️ Parametreler</h2>
+
+        <label>Başlangıç Ağırlıkları (örn : w1, w2)</label>
+        <input id="weights" type="text" value="0.1, 0.1">
+
+        <label>Bias (b)</label>
+        <input id="bias" type="number" value="-0.2" step="0.1">
+
+        <label>Öğrenme Oranı (η)</label>
+        <input id="lr" type="number" value="0.05" step="0.01">
+
+        <label>Epoch Sayısı</label>
+        <input id="epochs" type="number" value="50" min="1">
+
+        <div class="rule-group">
+          <label><input type="radio" name="learning-rule" value="perceptron" checked> Perceptron</label>
+          <label><input type="radio" name="learning-rule" value="adaline"> Delta (Adaline)</label>
+        </div>
+
+        <h3>📚 Örnek Veri Seti</h3>
+        <div class="preset-buttons">
+          <button id="load-and">AND</button>
+          <button id="load-or">OR</button>
+          <button id="load-xor">XOR</button>
+        </div>
+
+        <textarea id="data-text" rows="6">0, 0, 0
+0, 1, 1
+1, 0, 1
+1, 1, 1</textarea>
+
+        <button id="train-button" class="primary-btn">Eğitimi Başlat ▶️</button>
+      </section>
+
+      <section class="panel output-panel">
+        <h2>📊 Grafikler</h2>
+        <div class="chart-container"><canvas id="error-chart"></canvas></div>
+        <div class="chart-container"><canvas id="weights-chart"></canvas></div>
+
+        <h2>📜 Günlük</h2>
+        <div id="log-output"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

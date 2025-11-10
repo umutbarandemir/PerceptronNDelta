@@ -1,0 +1,135 @@
+:root {
+  --blue: #0078d7;
+  --gray-bg: #f4f6f8;
+  --white: #fff;
+  --border: #ddd;
+  --text: #333;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: var(--gray-bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-align: center;
+  background: var(--white);
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+h1 {
+  margin: 0;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.main-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.panel {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  flex: 1;
+  min-width: 350px;
+  max-width: 550px;
+}
+
+h2, h3 {
+  margin-top: 0;
+  color: var(--blue);
+  font-size: 1.1rem;
+}
+
+label {
+  font-weight: 500;
+  margin-top: 10px;
+  display: block;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.rule-group {
+  display: flex;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.preset-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  border: 1px solid var(--blue);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--blue);
+  cursor: pointer;
+  font-weight: 500;
+  padding: 8px;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+button:hover {
+  background: var(--blue);
+  color: white;
+}
+
+.primary-btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  margin-top: 15px;
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+}
+
+.chart-container {
+  margin: 15px 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+#log-output {
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px;
+  min-height: 150px;
+  max-height: 300px;
+  overflow-y: auto;
+  font-family: Consolas, monospace;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+}
+
+/* Log renkleri */
+.log-header { color: var(--blue); font-weight: bold; }
+.log-success { color: #28a745; font-weight: bold; }
+.log-warning { color: #fd7e14; font-weight: bold; }
+.log-error { color: #dc3545; font-weight: bold; }
+.log-info { color: #333; }
+.log-dim { color: #777; font-size: 0.9em; }
