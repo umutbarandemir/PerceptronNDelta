@@ -133,3 +133,21 @@ button:hover {
 .log-error { color: #dc3545; font-weight: bold; }
 .log-info { color: #333; }
 .log-dim { color: #777; font-size: 0.9em; }
+
+
+  #test-data {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+  }
+  
+  #test-button:hover {
+    background: #218838 !important;
+    transform: scale(1.02);
+    transition: 0.2s;
+  }
+  
+  #test-button:active {
+    transform: scale(0.98);
+  }
+
+
