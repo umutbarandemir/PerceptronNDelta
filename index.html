@@ -15,6 +15,7 @@
 
     <main class="main-grid">
 
+      <!-- SOL PANEL - PARAMETRELER -->
       <section class="panel input-panel">
         <h2>⚙️ Parametreler</h2>
 
@@ -48,29 +49,30 @@
 1, 1, 1</textarea>
 
         <button id="train-button" class="primary-btn">Eğitimi Başlat ▶️</button>
+
+        <!-- TEST BÖLÜMÜ -->
+        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
+        <h3>🧪 Test Verisi</h3>
+        <textarea id="test-data" placeholder="Format: x1, x2, y&#10;Örnek:&#10;0, 0, 0&#10;0, 1, 0&#10;1, 0, 0&#10;1, 1, 1" style="width:100%; height:100px; padding:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;"></textarea>
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button id="test-button" class="primary-btn" style="flex:1; background:#28a745; border:none; color:#fff;">🧪 Testi Başlat</button>
+          <button id="fill-test-and" style="flex:0 0 110px; background:#fff; border:1px solid #0078d7; color:#0078d7;">AND Örnekle</button>
+        </div>
       </section>
 
+      <!-- SAĞ PANEL - GRAFIKLER VE LOG -->
       <section class="panel output-panel">
-        <h2>📊 Grafikler</h2>
-        <div class="chart-container"><canvas id="error-chart"></canvas></div>
-        <div class="chart-container"><canvas id="weights-chart"></canvas></div>
+        <h2 style="margin-top: 0; margin-bottom: 5px;">📊 Grafikler</h2>
+        <div class="charts-row">
+          <div class="chart-container"><canvas id="error-chart"></canvas></div>
+          <div class="chart-container"><canvas id="weights-chart"></canvas></div>
+        </div>
 
-        <h2>📜 Günlük</h2>
+        <h2 style="margin-top: 10px; margin-bottom: 5px;">📜 Günlük</h2>
         <div id="log-output"></div>
       </section>
 
     </main>
-  </div>
-
-  <!-- Test Bölümü -->
-  <div style="margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 8px;">
-    <h3>🧪 Test Verisi (Hemen Kullan)</h3>
-    <textarea id="test-data" placeholder="Format: x1, x2, y&#10;Örnek:&#10;0, 0, 0&#10;0, 1, 0&#10;1, 0, 0&#10;1, 1, 1" style="width:100%; height:110px; padding:8px; border-radius:6px; border:1px solid #ddd;"></textarea>
-    <div style="display:flex; gap:10px; margin-top:10px;">
-      <button id="test-button" class="primary-btn" style="flex:1; background:#28a745; border:none; color:#fff;">🧪 Testi Başlat</button>
-      <button id="fill-test-and" style="flex:0 0 120px;">AND Örnekle</button>
-    </div>
-    <small style="display:block; margin-top:8px; color:#666;">Test verisini girdikten sonra "Testi Başlat" ile sonucu görebilirsiniz.</small>
   </div>
 
   <script src="script.js"></script>

@@ -29,10 +29,11 @@ h1 {
 
 .main-grid {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   padding: 20px;
   gap: 20px;
+  max-width: 2000px;
+  margin: 0 auto;
 }
 
 .panel {
@@ -40,9 +41,23 @@ h1 {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* ✅ SOL PANEL - PARAMETRELER */
+.input-panel {
+  flex: 0 0 380px;
+  max-height: 900px;
+  overflow-y: auto;
+}
+
+/* ✅ SAĞ PANEL - GRAFIKLER VE LOG */
+.output-panel {
+  display: flex;
+  flex-direction: column;
   flex: 1;
-  min-width: 350px;
-  max-width: 550px;
+  min-width: 600px;
+  max-width: 900px;
+  height: 900px;
 }
 
 h2, h3 {
@@ -106,48 +121,88 @@ button:hover {
   padding: 10px;
 }
 
+/* ✅ İKİ GRAFİK YAN YANA */
+.charts-row {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
 .chart-container {
-  margin: 15px 0;
+  margin: 0;
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 10px;
+  height: 320px;
+  position: relative;
+  flex: 1;
 }
 
+/* ✅ LOG ÇIKTI - GENIŞ ALAN */
 #log-output {
   background: #f9fafb;
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 10px;
-  min-height: 150px;
-  max-height: 300px;
   overflow-y: auto;
   font-family: Consolas, monospace;
   font-size: 0.85rem;
   white-space: pre-wrap;
+  flex: 1;
+  word-break: break-word;
 }
 
 /* Log renkleri */
 .log-header { color: var(--blue); font-weight: bold; }
 .log-success { color: #28a745; font-weight: bold; }
+.log-success-small { color: #28a745; font-size: 0.9em; }
 .log-warning { color: #fd7e14; font-weight: bold; }
 .log-error { color: #dc3545; font-weight: bold; }
 .log-info { color: #333; }
 .log-dim { color: #777; font-size: 0.9em; }
+.log-summary { background: #f0f0f0; padding: 10px; border-radius: 5px; margin: 5px 0; }
 
+#test-data {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  resize: none;
+}
 
-  #test-data {
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
+#test-button:hover {
+  background: #218838 !important;
+}
+
+#test-button:active {
+  transform: scale(0.98);
+}
+
+#fill-test-and:hover,
+#fill-test-or:hover,
+#fill-test-xor:hover {
+  background: var(--blue);
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .main-grid {
+    flex-direction: column;
   }
   
-  #test-button:hover {
-    background: #218838 !important;
-    transform: scale(1.02);
-    transition: 0.2s;
+  .input-panel {
+    flex: 1;
+    max-height: none;
   }
   
-  #test-button:active {
-    transform: scale(0.98);
+  .output-panel {
+    min-width: auto;
+    max-width: none;
+    height: auto;
   }
+  
+  .charts-row {
+    flex-direction: column;
+  }
+}
 
 

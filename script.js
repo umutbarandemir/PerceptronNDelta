@@ -193,7 +193,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // ✅ Eğitilmiş ağırlıkları global değişkenlere kaydet
       trainedW = [...w];
       trainedB = b;
-
+      trainedRule = rule;
+      
       log("\n✅ <strong>Sistem test için hazır!</strong> Alttaki test alanına veri giriniz.", "log-success");
 
     } catch (e) {
@@ -270,4 +271,20 @@ document.addEventListener("DOMContentLoaded", () => {
       log(`❌ <strong>TEST HATASI:</strong> ${e.message}`, "log-error");
     }
   }
+
+  // ✅ Global eğitim sonucu için
+  let trainedW = null;
+  let trainedB = null;
+  let trainedRule = null;
+
+  // ✅ Fill test butonunu ekle
+  document.getElementById("fill-test-and").addEventListener("click", () => {
+    document.getElementById("test-data").value = "0, 0, 0\n0, 1, 0\n1, 0, 0\n1, 1, 1";
+  });
+  document.getElementById("fill-test-or").addEventListener("click", () => {
+    document.getElementById("test-data").value = "0, 0, 0\n0, 1, 1\n1, 0, 1\n1, 1, 1";
+  });
+  document.getElementById("fill-test-xor").addEventListener("click", () => {
+    document.getElementById("test-data").value = "0, 0, 0\n0, 1, 1\n1, 0, 1\n1, 1, 0";
+  });
 });
