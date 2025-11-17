@@ -9,67 +9,110 @@
 </head>
 <body>
   <div class="app-container">
-    <header>
-      <h1>🧠 Perceptron / Delta (Adaline) Simülatörü</h1>
+    <header class="header">
+      <div class="header-content">
+        <h1>🧠 Perceptron / Delta (Adaline)</h1>
+      </div>
     </header>
 
-    <main class="main-grid">
+    <main class="main-container">
 
-      <!-- SOL PANEL - PARAMETRELER -->
-      <section class="panel input-panel">
-        <h2>⚙️ Parametreler</h2>
+      <!-- SOL PANEL - KONTROLLER -->
+      <aside class="sidebar">
+        <!-- Eğitim Parametreleri -->
+        <div class="card">
+          <h3 class="card-title">⚙️ Eğitim Parametreleri</h3>
+          
+          <div class="form-group">
+            <label for="weights">Başlangıç Ağırlıkları</label>
+            <input id="weights" type="text" value="0.1, 0.1" placeholder="w1, w2">
+          </div>
 
-        <label>Başlangıç Ağırlıkları (örn : w1, w2)</label>
-        <input id="weights" type="text" value="0.1, 0.1">
+          <div class="form-group">
+            <label for="bias">Bias (b)</label>
+            <input id="bias" type="number" value="-0.2" step="0.1">
+          </div>
 
-        <label>Bias (b)</label>
-        <input id="bias" type="number" value="-0.2" step="0.1">
+          <div class="form-group">
+            <label for="lr">Öğrenme Hızı (η)</label>
+            <input id="lr" type="number" value="0.05" step="0.01" min="0.001" max="1">
+          </div>
 
-        <label>Öğrenme Oranı (η)</label>
-        <input id="lr" type="number" value="0.05" step="0.01">
+          <div class="form-group">
+            <label for="epochs">Epoch Sayısı</label>
+            <input id="epochs" type="number" value="50" min="1" max="1000">
+          </div>
 
-        <label>Epoch Sayısı</label>
-        <input id="epochs" type="number" value="50" min="1">
-
-        <div class="rule-group">
-          <label><input type="radio" name="learning-rule" value="perceptron" checked> Perceptron</label>
-          <label><input type="radio" name="learning-rule" value="adaline"> Delta (Adaline)</label>
+          <div class="form-group">
+            <label>Algoritma Seçimi</label>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="learning-rule" value="perceptron" checked>
+                <span>Perceptron</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="learning-rule" value="adaline">
+                <span>Delta (Adaline)</span>
+              </label>
+            </div>
+          </div>
         </div>
 
-        <h3>📚 Örnek Veri Seti</h3>
-        <div class="preset-buttons">
-          <button id="load-and">AND</button>
-          <button id="load-or">OR</button>
-          <button id="load-xor">XOR</button>
-        </div>
+        <!-- Veri Seti -->
+        <div class="card">
+          <h3 class="card-title">📚 Eğitim Verisi</h3>
+          
+          <div class="preset-group">
+            <button id="load-and" class="preset-btn">AND</button>
+            <button id="load-or" class="preset-btn">OR</button>
+            <button id="load-xor" class="preset-btn">XOR</button>
+          </div>
 
-        <textarea id="data-text" rows="6">0, 0, 0
+          <textarea id="data-text" placeholder="x1, x2, y&#10;0, 0, 0&#10;0, 1, 1">0, 0, 0
 0, 1, 1
 1, 0, 1
 1, 1, 1</textarea>
 
-        <button id="train-button" class="primary-btn">Eğitimi Başlat ▶️</button>
-
-        <!-- TEST BÖLÜMÜ -->
-        <hr style="margin: 15px 0; border: none; border-top: 1px solid #ddd;">
-        <h3>🧪 Test Verisi</h3>
-        <textarea id="test-data" placeholder="Format: x1, x2, y&#10;Örnek:&#10;0, 0, 0&#10;0, 1, 0&#10;1, 0, 0&#10;1, 1, 1" style="width:100%; height:100px; padding:8px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box;"></textarea>
-        <div style="display:flex; gap:8px; margin-top:10px;">
-          <button id="test-button" class="primary-btn" style="flex:1; background:#28a745; border:none; color:#fff;">🧪 Testi Başlat</button>
-          <button id="fill-test-and" style="flex:0 0 110px; background:#fff; border:1px solid #0078d7; color:#0078d7;">AND Örnekle</button>
-        </div>
-      </section>
-
-      <!-- SAĞ PANEL - GRAFIKLER VE LOG -->
-      <section class="panel output-panel">
-        <h2 style="margin-top: 0; margin-bottom: 5px;">📊 Grafikler</h2>
-        <div class="charts-row">
-          <div class="chart-container"><canvas id="error-chart"></canvas></div>
-          <div class="chart-container"><canvas id="weights-chart"></canvas></div>
+          <button id="train-button" class="btn btn-primary">▶️ Eğitimi Başlat</button>
         </div>
 
-        <h2 style="margin-top: 10px; margin-bottom: 5px;">📜 Günlük</h2>
-        <div id="log-output"></div>
+        <!-- Test Verisi -->
+        <div class="card">
+          <h3 class="card-title">🧪 Test Verisi</h3>
+          
+          <textarea id="test-data" placeholder="x1, x2, y&#10;0, 0, 0&#10;1, 1, 1"></textarea>
+
+          <div class="button-group">
+            <button id="test-button" class="btn btn-success">🧪 Test Et</button>
+            <button id="fill-test-and" class="btn btn-secondary">AND Örnekle</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- SAĞ PANEL - GRAFİKLER VE LOG -->
+      <section class="content">
+        <!-- Grafikler -->
+        <div class="cards-grid">
+          <div class="card chart-card">
+            <h3 class="card-title">📉 Hata Grafiği</h3>
+            <div class="chart-wrapper">
+              <canvas id="error-chart"></canvas>
+            </div>
+          </div>
+
+          <div class="card chart-card">
+            <h3 class="card-title">📈 Ağırlık Değişimi</h3>
+            <div class="chart-wrapper">
+              <canvas id="weights-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Log Çıktısı -->
+        <div class="card log-card">
+          <h3 class="card-title">📜 İşlem Günlüğü</h3>
+          <div id="log-output" class="log-output"></div>
+        </div>
       </section>
 
     </main>
