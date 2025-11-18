@@ -85,7 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Düzeltilmiş ve ikonlu startTraining
   function startTraining() {
     logOutput.innerHTML = "";
     try {
@@ -123,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
           const yPred = net >= 0 ? 1 : 0;
           const err = (rule === "adaline") ? (y[i] - net) : (y[i] - yPred);
 
-          // Iteration-level log (net, pred, error) — mavi / kırmızı vurgulu
           log(
             `Epoch <strong>${epoch + 1}.${i + 1}</strong> | Girdi: [${X[i].join(", ")}] → Hedef: <strong>${y[i]}</strong> ` +
             `&nbsp; <span class="log-net">🔎 Net:</span> <strong>${net.toFixed(3)}</strong> ` +
@@ -186,7 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
         log(`\n⚠️ Eğitim tamamlandı fakat tüm örnekler doğru sınıflandırılamadı. (XOR gibi lineer ayrılmaz veri olabilir.)`, "log-warning");
       }
 
-      // Özet: başlangıç vs bitiş (ikonlu ve vurgulu)
       log("\n--- EĞİTİM ÖZETİ ---", "log-header");
       log(
         `🔸 <span class="log-start">Başlangıç:</span> w = [${wInitial.map(v => v.toFixed(3)).join(", ")}], b = ${bInitial.toFixed(3)}<br>` +
