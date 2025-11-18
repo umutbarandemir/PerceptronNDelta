@@ -92,8 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
       let w = weightsInput.value.split(",").map(v => parseFloat(v.trim()));
       let b = parseFloat(biasInput.value);
       const lr = parseFloat(lrInput.value);
-      const epochs = parseInt(epochInput.value);
+      const epochs = parseInt(epochInput.value, 10);
       const rule = document.querySelector("input[name='learning-rule']:checked").value;
+      // Adaline için opsiyonel "kabul edilebilir MSE"
+      const mseRaw = document.getElementById("mse-threshold")?.value;
+      const mseThreshold = (mseRaw && mseRaw.trim() !== "") ? parseFloat(mseRaw) : NaN;
+      if (!Number.isNaN(mseThreshold) && mseThreshold < 0) throw new Error("MSE eşik değeri negatif olamaz.");
+
       const { X, y } = parseDataset(dataText.value);
 
       if (!X.length) throw new Error("Geçerli veri yok veya format hatası.");
@@ -131,20 +136,13 @@ document.addEventListener("DOMContentLoaded", () => {
           const oldW = [...w];
           const oldB = b;
 
-          // ✅ DEBUG: err değerini kontrol et
-          console.log(`Epoch ${epoch + 1}.${i + 1} - err: ${err}, lr: ${lr}, X[i]: [${X[i]}]`);
-
           // Güncelleme
           for (let j = 0; j < w.length; j++) w[j] += lr * err * X[i][j];
           b += lr * err;
 
-          // ✅ DEBUG: değişim miktarını göster
-          console.log(`Değişim: w=[${oldW.map((v, idx) => (w[idx] - v).toFixed(3)).join(", ")}], b=${(b - oldB).toFixed(3)}`);
-
           const diffs = w.map((val, idx) => {
             const d = val - oldW[idx];
             const sign = d > 0 ? "▲" : (d < 0 ? "▼" : "→");
-            // ✅ FİX: Math.abs(d).toFixed(3) yerine direkt göster
             return `${val.toFixed(3)} <span class="log-diff">${sign} ${Math.abs(d).toFixed(4)}</span>`;
           }).join(", ");
 
@@ -161,13 +159,21 @@ document.addEventListener("DOMContentLoaded", () => {
           sumSqErr += (y[i] - net) ** 2;
         }
 
-        errors.push(rule === "adaline" ? sumSqErr / X.length : sumErr);
+        // Epoch sonrası MSE hesapla
+        const mse = sumSqErr / X.length;
+        errors.push(rule === "adaline" ? mse : sumErr);
         wHist.push([...w]);
 
         if (rule === "adaline")
-          log(`📉 <span class="log-error-val">Epoch ${epoch + 1} MSE:</span> <strong>${(sumSqErr / X.length).toFixed(4)}</strong>`, "log-info");
+          log(`📉 <span class="log-error-val">Epoch ${epoch + 1} MSE:</span> <strong>${mse.toFixed(6)}</strong>`, "log-info");
         else
           log(`📉 <span class="log-error-val">Epoch ${epoch + 1} Toplam Hata:</span> <strong>${sumErr}</strong>`, "log-info");
+
+        // Erken durdurma: Adaline için kabul edilebilir MSE sağlandıysa bitir
+        if (rule === "adaline" && !Number.isNaN(mseThreshold) && mse <= mseThreshold) {
+          log(`\n✅ Kabul edilebilir MSE (≤ ${mseThreshold}) sağlandı — eğitim erken durduruldu. (Epoch ${epoch + 1})`, "log-success");
+          break;
+        }
 
         if (sumErr === 0 && rule === "perceptron") {
           solved = true;
